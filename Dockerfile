@@ -2,16 +2,15 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
+# Install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy all files
 COPY . .
 
-RUN useradd -m -u 1000 matchpulse && chown -R matchpulse:matchpulse /app
-USER matchpulse
+# Set Python path
+ENV PYTHONPATH=/app
 
-CMD ["python", "-m", "bot.main"]
+# Run the bot directly (not as module)
+CMD ["python", "bot/main.py"]
