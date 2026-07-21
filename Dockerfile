@@ -2,15 +2,16 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Install dependencies
+# Copy and install requirements
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all files
+# Copy everything (including bot folder)
 COPY . .
 
-# Set Python path
-ENV PYTHONPATH=/app
+# List files to verify (for debugging)
+RUN ls -la /app/
+RUN ls -la /app/bot/
 
-# Run the bot directly (not as module)
-CMD ["python", "bot/main.py"]
+# Run the bot
+CMD ["python", "/app/bot/main.py"]
