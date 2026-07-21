@@ -1,2 +1,2 @@
 # This file makes 'bot' a Python package
-# DO NOT DELETE THIS FILE
+# DO NOT DELETE
